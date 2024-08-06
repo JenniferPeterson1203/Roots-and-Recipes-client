@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
-// import { getAuth } from "firebase/auth";
-
-import { getUserData } from "../../helpers/getUserData";
-
-import { capitalizeFirstLetter } from "../../helpers/helpers";
-import useHandleSearchChange from "../../helpers/useHandleSearchChange";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from "@mui/icons-material/Edit";
-import AddCircleIcon from "@mui/icons-material/AddCircle"; // Importing the AddCircleIcon
-import { placeholder } from "@cloudinary/react";
-import placeholderImage from "../../assets/recipe_place_holder.png";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+
+import { getUserData } from "../../helpers/getUserData";
+import useHandleSearchChange from "../../helpers/useHandleSearchChange";
+import { capitalizeFirstLetter } from "../../helpers/helpers";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
@@ -22,8 +18,6 @@ export const MyCookbook = () => {
   const [myRecipes, setMyRecipes] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [userDetails, setUserDetails] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [modalChoice, setModalChoice] = useState("");
 
   const { searchInput, handleSearchChange, clearSearch } =
     useHandleSearchChange(myRecipes, setRecipes, (isDefault) => {
@@ -86,7 +80,6 @@ export const MyCookbook = () => {
     navigate("/family_cookbook", window.location.reload);
   };
 
-  // Determine the display name based on nickname or first name
   const displayName = userDetails
     ? userDetails.nickname
       ? `${capitalizeFirstLetter(userDetails.nickname)}'s Cookbook`
@@ -116,8 +109,7 @@ export const MyCookbook = () => {
             {searchInput ? (
               <div
                 onClick={clearSearch}
-                className="absolute right-8 top-1/2 transform -translate-y-1/2 cursor-pointer p-1"
-              >
+                className="absolute right-8 top-1/2 transform -translate-y-1/2 cursor-pointer p-1">
                 <ClearIcon />
               </div>
             ) : (
@@ -135,36 +127,36 @@ export const MyCookbook = () => {
             </p>
           </Link>
         ) : recipes.length > 0 ? (
-          recipes
-            .sort((a, b) => a.id - b.id)
-            .map((recipe) => (
-              <div
-                key={recipe.id}
-                className="flex items-center justify-between bg-white p-2 rounded-lg shadow-md mb-4"
-              >
-                <Link to={`/recipe_show/${recipe.id}`} className="flex-1 ml-2">
-                  <div className="rounded-xl">
-                    <img
-                      src={recipe.photo || placeholderImage}
-                      alt={recipe.name}
-                    />
-                    <p className="p-4 rounded-lg text-black text-lg">
-                      {recipe.chef}'s {recipe.name}
-                    </p>
-                  </div>
-                </Link>
-                <div className="flex items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {recipes
+              .sort((a, b) => a.id - b.id)
+              .map((recipe) => (
+                <div
+                  key={recipe.id}
+                  className="relative bg-white p-4 rounded-lg shadow-md">
                   <EditIcon
                     onClick={() => navigate(`/edit/${recipe.id}`)}
-                    className="cursor-pointer mr-2"
+                    className="absolute top-2 right-2 cursor-pointer"
                   />
-                  <AddCircleIcon
-                    onClick={() => handleClick(recipe)}
-                    className="text-[#713A3A] cursor-pointer"
-                  />
+                  <Link to={`/recipe_show/${recipe.id}`} className="block">
+                    <img
+                      src={recipe.photo}
+                      alt={recipe.name}
+                      className="rounded-lg w-full mb-4 pt-6"
+                    />
+                    <p className="text-lg text-black font-semibold">
+                      {recipe.chef}'s {recipe.name}
+                    </p>
+                  </Link>
+                  <div className="flex justify-center mt-4">
+                    <AddCircleIcon
+                      onClick={() => handleClick(recipe)}
+                      className="text-[#713A3A] cursor-pointer"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))
+              ))}
+          </div>
         ) : (
           <p className="text-center bg-[#D9D9D9] p-4 rounded-lg shadow-md">
             Sorry, recipe cannot be found

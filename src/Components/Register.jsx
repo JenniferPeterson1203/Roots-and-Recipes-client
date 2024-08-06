@@ -9,8 +9,6 @@ import {
 import { auth } from "../helpers/firebase";
 import { register } from "../helpers/register";
 
-import familyKitchen from "../assets/family_kitchen.jpg";
-
 function Register({ setNavBarToggle }) {
   const [newUser, setNewUser] = useState({
     email: "",
@@ -87,40 +85,27 @@ function Register({ setNavBarToggle }) {
   };
 
   return (
-    // <div
-    //   className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center"
-    //   style={{
-    //     backgroundImage: `url('../src/assets/family_kitchen.jpg')`,
-    //     backgroundAttachment: 'fixed',
-    //     backgroundSize: 'cover',
-    //     backgroundRepeat: 'no-repeat',
-    //     minHeight: '100vh',
-    //     width: '100%',
-    //     overflow: 'hidden',
-    //   }}
-    // >
-
     <div
       className="min-h-screen flex flex-col justify-center items-center bg-cover bg-center"
       style={{
-        backgroundImage: `url(${familyKitchen})`,
-        backgroundAttachment: "fixed",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100vh",
-        width: "100%",
-        overflow: "hidden",
+        backgroundImage: `url('https://res.cloudinary.com/djg5i10dg/image/upload/v1722887437/pexels-august-de-richelieu-4262010_atkl7f.jpg')`,
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+        width: '100%',
+        overflow: 'hidden',
       }}
     >
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-opacity-70"></div>
 
-      <div className="relative w-full max-w-md p-8 rounded-lg shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-white border-opacity-30">
-        <h3 className="text-2xl font-bold mb-6 text-center lexend-exa text-white">
+      <div className="relative w-full max-w-sm p-6 rounded-lg shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-white border-opacity-30">
+        <h3 className="text-xl font-bold mb-4 text-center lexend-exa text-white">
           Sign Up
         </h3>
 
-        <form onSubmit={handleRegister} className="space-y-6 lexend-exa">
+        <form onSubmit={handleRegister} className="space-y-4 lexend-exa">
           <div>
             <label
               htmlFor="first_name"
@@ -136,7 +121,7 @@ function Register({ setNavBarToggle }) {
               value={newUser.first_name}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
+              className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
             />
           </div>
 
@@ -154,7 +139,7 @@ function Register({ setNavBarToggle }) {
               name="last_name"
               value={newUser.last_name}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
+              className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
             />
           </div>
 
@@ -172,7 +157,7 @@ function Register({ setNavBarToggle }) {
               value={newUser.email}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
+              className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
             />
           </div>
 
@@ -190,7 +175,7 @@ function Register({ setNavBarToggle }) {
               name="nickname"
               value={newUser.nickname}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
+              className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
             />
           </div>
 
@@ -208,7 +193,7 @@ function Register({ setNavBarToggle }) {
               value={newUser.password}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
+              className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-40 text-gray-900"
             />
           </div>
 
@@ -222,7 +207,7 @@ function Register({ setNavBarToggle }) {
           </div>
         </form>
 
-        <div className="mt-6 text-center lexend-exa text-white">
+        <div className="mt-4 text-center lexend-exa text-white">
           <p className="text-sm">
             Already registered?{" "}
             <Link
