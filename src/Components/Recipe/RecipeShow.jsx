@@ -130,16 +130,23 @@ const RecipeShow = () => {
   return (
     <div className="bg-transparent min-h-screen py-8 -mt-4">
       <div className="bg-white shadow-lg rounded-lg p-6 mx-auto max-w-4xl">
-        <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
-          {name[0].toUpperCase() + name.slice(1)}
-        </h1>
+        {name && (
+          <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
+            {typeof name === "string"
+              ? name[0].toUpperCase() + name.slice(1)
+              : ""}
+          </h1>
+        )}
+
         <div className="bg-gray-100 rounded-lg p-4 mb-6">
-          {user.family_code !== "000000" && singleRecipe.family_id !== 1 && (
-            <p className="text-lg mb-2 font-bold">
-              Family:
-              <span className="font-thin"> {familyName}</span>
-            </p>
-          )}
+          <p className="text-lg mb-2 font-bold">
+            Family:
+            <span className="font-thin">
+              {" "}
+              {typeof familyName === "string" ? familyName : ""}
+            </span>
+          </p>
+
           <p className="text-lg mb-2">
             <span className="font-bold">Chef:</span> {chef}
           </p>
