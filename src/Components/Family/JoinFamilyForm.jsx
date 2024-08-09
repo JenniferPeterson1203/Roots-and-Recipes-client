@@ -47,32 +47,34 @@ const JoinFamilyForm = () => {
     getUser();
   }, []);
 
-  const handleJoinFamily = (e) => {
+  const handleJoinFamily = async (e) => {
     e.preventDefault();
     if (
       allFamilyCodes.some((code) => code.family_code === familyCodeInput) &&
       familyCodeInput !== "000000"
     ) {
-      fetch(
-        `${URL}/api/families/codes/update/${familyCodeInput}/${selectedRole}/${user.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Network response was not ok");
+      try {
+        const response = await fetch(
+          `${URL}/api/families/codes/update/${familyCodeInput}/${selectedRole}/${user.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-          return res.json();
-        })
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Fetch error:", error));
-      setModal(false);
-      navigate(`/family_cookbook`);
-      window.location.reload();
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data);
+        setModal(false);
+        navigate(`/family_cookbook`);
+        window.location.reload();
+      } catch (error) {
+        console.error("Fetch error:", error);
+        alert("An error occurred while joining the family. Please try again.");
+      }
     } else {
       alert("INVALID FAMILY CODE");
     }
